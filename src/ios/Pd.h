@@ -1,11 +1,3 @@
-//
-//  Pd.h
-//  HelloCordova
-//
-//  Created by Cricket on 1/28/16.
-//
-//
-
 #import <Cordova/CDVPlugin.h>
 #import "PdAudioController.h"
 #import "PdBase.h"
@@ -28,9 +20,11 @@
 
 - (void) sendSymbol:(CDVInvokedUrlCommand*) command;
 
-- (void) receiveSymbol:(NSString *)symbol fromSource:(NSString *)source;
+- (void) sendFloat:(CDVInvokedUrlCommand*) command;
 
 - (void) receiveBangFromSource:(NSString *)source;
+
+- (void) receiveSymbol:(NSString *)symbol fromSource:(NSString *)source;
 
 - (void) receiveFloat:(float)received fromSource:(NSString *)source;
 

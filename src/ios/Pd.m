@@ -1,11 +1,3 @@
-//
-//  Pd.m
-//  HelloCordova
-//
-//  Created by Cricket on 1/28/16.
-//
-//
-
 #import "Pd.h"
 #import "PdAudioController.h"
 
@@ -78,9 +70,23 @@
 
 - (void) sendSymbol:(CDVInvokedUrlCommand *)command
 {
-    [PdBase sendSymbol:[command.arguments objectAtIndex:0] toReceiver:[command.arguments objectAtIndex:0]];
+    [PdBase sendSymbol:[command.arguments objectAtIndex:0] toReceiver:[command.arguments objectAtIndex:1]];
     
     [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK] callbackId:command.callbackId];
+}
+
+- (void) sendFloat:(CDVInvokedUrlCommand *)command
+{
+    [PdBase sendFloat:[[command.arguments objectAtIndex:0] floatValue] toReceiver:[command.arguments objectAtIndex:1]];
+    
+    [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK] callbackId:command.callbackId];
+}
+
+- (void) receiveBangFromSource:(NSString *)source
+{
+    NSString *js = [NSString stringWithFormat:@"window.Pd.receiveBang(\"%@\");", source];
+    
+    [self.webView stringByEvaluatingJavaScriptFromString:js];
 }
 
 - (void) receiveSymbol:(NSString *)symbol fromSource:(NSString *)source
@@ -94,14 +100,7 @@
 - (void) receiveFloat:(float)received fromSource:(NSString *)source
 {
     NSLog(@"Float received: %f", received);
-    NSString *js = [NSString stringWithFormat:@"window.Pd.receiveNumber(\"%@\", %f);", source, received];
-    
-    [self.webView stringByEvaluatingJavaScriptFromString:js];
-}
-
-- (void) receiveBangFromSource:(NSString *)source
-{
-    NSString *js = [NSString stringWithFormat:@"window.Pd.receiveBang(\"%@\");", source];
+    NSString *js = [NSString stringWithFormat:@"window.Pd.receiveFloat(\"%@\", %f);", source, received];
     
     [self.webView stringByEvaluatingJavaScriptFromString:js];
 }

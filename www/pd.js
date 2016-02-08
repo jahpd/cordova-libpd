@@ -65,23 +65,23 @@ module.exports = {
     /**
      * Template function to be called from native side when receiving symbol
      * 
-     * @param {string} receiver Name of the subscribed receiver
+     * @param {string} sender Name of the subscribed receiver
      * @param {string} value Value received
      */
-    receiveSymbol: function (receiver, value) { console.log('symbol:', receiver, value); },
+    receiveSymbol: function (sender, value) { console.log('symbol:', sender, value); },
     
     /**
      * Template function to be called from native side when receiving bang
      * 
-     * @param {string} receiver Name of the subscribed receiver
+     * @param {string} sender Name of the subscribed receiver
      */
-    receiveBang: function (receiver, value) { console.log('bang:', receiver); },
+    receiveBang: function (sender, value) { console.log('bang:', sender); },
     
     /**
      * Template function to be called from native side when receiving number
      * 
-     * @param {string} receiver Name of the subscribed receiver
+     * @param {string} sender Name of the subscribed receiver
      * @param {number} value Value received
      */
-    receiveNumber: function (receiver, value) { console.log('nuber:', receiver, value); }
+    receiveNumber: function (sender, value) { console.log('nuber:', sender, value); }
 };
